@@ -1,8 +1,8 @@
 package view;
 
-public class Login_Choice {
+public interface Login_Choice {
 	int MRMBERSHIP = 1;
-	int LOGIN = 1;
-	int MYPAGE = 1;
-	int UPDATE = 1;
+	int LOGIN = 2;
+	int MYPAGE = 3;
+	int UPDATE = 4;
 }

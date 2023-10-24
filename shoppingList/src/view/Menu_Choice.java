@@ -1,8 +1,9 @@
 package view;
 
-public class Menu_Choice {
+public interface Menu_Choice {
 	int LOGIN = 1;
-	int CATEGORY = 1;
-	int CART= 1;
-	int MANAGER = 1;
+	int CATEGORY = 2;
+	int CART= 3;
+	int MANAGER = 4;
+	int EXIT = 5;
 }
