@@ -1,3 +1,5 @@
+import controller.LoginRegisterManager;
+import view.Login_Choice;
 import view.MenuViewer;
 import view.Menu_Choice;
 
@@ -51,9 +53,28 @@ public class ShoppingListMaimn {
 
 
 	//회원가입 로그인페이지
-	private static void loginMenu() {
-		// TODO Auto-generated method stub
-		
+	private static void loginMenu() throws Exception {
+		int num;
+		LoginRegisterManager loginRegisterManager = new LoginRegisterManager();
+		MenuViewer.loginMenu();
+		num = MenuViewer.num.nextInt();
+		switch(num) {
+		case Login_Choice.MRMBERSHIP:
+			loginRegisterManager.membershipJoin();
+			break;
+		case Login_Choice.LOGIN:
+			loginRegisterManager.loginCheck();
+			break;
+		case Login_Choice.MYPAGE:
+			loginRegisterManager.loginMypage();
+			break;
+		case Login_Choice.UPDATE:
+			loginRegisterManager.loginUpdate();
+			break;
+		default:
+			System.out.println("해당번호만 입력하세요...");
+			
+		}
 	}//loginMenu
 	
 	//카테고리 페이지
