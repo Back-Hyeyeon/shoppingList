@@ -1,9 +1,13 @@
 import controller.LoginRegisterManager;
+import model.LoginVo;
 import view.Login_Choice;
 import view.MenuViewer;
 import view.Menu_Choice;
 
 public class ShoppingListMaimn {
+
+	private static final String String = null;
+	private static final LoginVo LoginVo = null;
 
 	public static void main(String[] args) {
 		mainMenu();
@@ -65,12 +69,13 @@ public class ShoppingListMaimn {
 		case Login_Choice.LOGIN:
 			loginRegisterManager.loginCheck();
 			break;
-		case Login_Choice.MYPAGE:
-			loginRegisterManager.loginMypage();
-			break;
 		case Login_Choice.UPDATE:
 			loginRegisterManager.loginUpdate();
 			break;
+		case Login_Choice.LOGOUT:
+			loginRegisterManager.logout();
+			break;
+			
 		default:
 			System.out.println("해당번호만 입력하세요...");
 			

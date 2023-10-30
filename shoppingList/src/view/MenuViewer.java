@@ -10,7 +10,7 @@ public class MenuViewer {
 		System.out.println();
 		System.out.println("여성 쇼핑몰 에비앙>>");
 		System.out.println("원하는 목록을 선택해주세요");
-		System.out.println("1. 회원가입 회원가입/로그인/내정보/내정보수정/");
+		System.out.println("1. 회원가입 회원가입/로그인 및 내정보/내정보수정/로그아웃");
 		System.out.println("2. 카테고리 목록/장바구니추가");
 		System.out.println("3. 장바구니 목록/삭제/");
 		System.out.println("4. 관리자로그인 추가/수정/삭제/");
@@ -22,9 +22,9 @@ public class MenuViewer {
 		System.out.println();
 		System.out.println("회원가입 페이지입니다.");
 		System.out.println("1. 회원가입");
-		System.out.println("2. 로그인");
-		System.out.println("3. 내정보");
-		System.out.println("4. 내정보 수정");
+		System.out.println("2. 로그인 및 내정보");
+		System.out.println("3. 내정보 수정");
+		System.out.println("4. 로그아웃(id삭제)");
 	}
 //카테고리 페이지
 	public static void categoryMenu() {

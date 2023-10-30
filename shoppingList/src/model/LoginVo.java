@@ -69,7 +69,7 @@ public class LoginVo {
 //	private String l_address = null;
 	@Override
 	public String toString() {
-		return String.format("일련번호 : %d , 아이디 : %s ,이메일 : %s ,주소 : %s \n", getNo(),getL_id(),getL_email(),getL_address());
+		return String.format("일련번호 : %d , 아이디 : %s ,비밀번호 : %s ,이메일 : %s ,주소 : %s \n", getNo(),getL_id(),getL_pw(), getL_email(),getL_address());
 	}
 
 	@Override
