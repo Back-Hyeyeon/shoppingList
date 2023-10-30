@@ -117,10 +117,7 @@ public class CategoryVo {
 		CategoryVo ctgvo = (CategoryVo)obj;
 		return ctgvo.no == this.no && ctgvo.c_cord.equals(this.c_cord);
 	}
-	
-	
-	
-	
-	
+
+
 	
 } 

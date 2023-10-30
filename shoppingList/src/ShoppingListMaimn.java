@@ -1,6 +1,13 @@
+import controller.CartDAO;
+import controller.CartRegisterManager;
+import controller.CategoryRegisterManager;
 import controller.LoginRegisterManager;
+import controller.ManagerRegisterManager;
 import model.LoginVo;
+import view.Cart_Choice;
+import view.Category_Choice;
 import view.Login_Choice;
+import view.Manager_Choice;
 import view.MenuViewer;
 import view.Menu_Choice;
 
@@ -8,6 +15,7 @@ public class ShoppingListMaimn {
 
 	private static final String String = null;
 	private static final LoginVo LoginVo = null;
+	private static final java.lang.String id = null;
 
 	public static void main(String[] args) {
 		mainMenu();
@@ -58,7 +66,7 @@ public class ShoppingListMaimn {
 
 	//회원가입 로그인페이지
 	private static void loginMenu() throws Exception {
-		int num;
+		int num = 0;
 		LoginRegisterManager loginRegisterManager = new LoginRegisterManager();
 		MenuViewer.loginMenu();
 		num = MenuViewer.num.nextInt();
@@ -83,20 +91,58 @@ public class ShoppingListMaimn {
 	}//loginMenu
 	
 	//카테고리 페이지
-	private static void categoryMenu() {
-		// TODO Auto-generated method stub
+	private static void categoryMenu() throws Exception {
+		int num = 0;
+		CategoryRegisterManager categoryRegisterManager = new CategoryRegisterManager();
+		MenuViewer.categoryMenu();
+		num = MenuViewer.num.nextInt();
+		switch(num) {
+		case Category_Choice.LIST:
+			categoryRegisterManager.categoryList();
+			break;
+		case Category_Choice.INSERT:
+			categoryRegisterManager.addCaetInsert();
+			break;
+		default:
+			System.out.println("해당번호만 입력하세요...");
+		}
 		
 	}//categoryMenu
 	
 	//장바구니 페이지
 	private static void cartMenu() {
-		// TODO Auto-generated method stub
+		int num = 0;
 		
+		CartRegisterManager cartRegisterManager = new CartRegisterManager();
+		MenuViewer.cartMenu();
+		switch(num) {
+		case Cart_Choice.LIST:
+			cartRegisterManager.cartChokList();
+			break;
+		case Cart_Choice.DELETE:
+			cartRegisterManager.cartChokListDelete();
+			break;
+			
+		default:
+			System.out.println("해당번호만 입력하세요...");
+			}
 	}//cartMenu
 	
 	//관리자 페이지
-	private static void managerMenu() {
-		// TODO Auto-generated method stub
+	private static void managerMenu() throws Exception {
+		int num = 0;
+		ManagerRegisterManager managerRegisterManager = new ManagerRegisterManager();
+		switch(num) {
+		case Manager_Choice.MLOG:
+			managerRegisterManager.managerLogin();
+			break;
+		case Manager_Choice.INSERT:
+			break;
+		case Manager_Choice.UPDATE:
+			break;
+		case Manager_Choice.DELETE:
+			break;
+		}
 		
 	}//managerMenu
 

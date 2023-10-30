@@ -1,7 +1,8 @@
 package view;
 
 public interface Manager_Choice {
-	int INSERT = 1;
-	int UPDATE = 2;
-	int DELETE = 3;
+	int MLOG = 1;
+	int INSERT = 2;
+	int UPDATE = 3;
+	int DELETE = 4;
 }
