@@ -13,7 +13,22 @@ public class LoginRegisterManager {
 		LoginDAO lgdao = new LoginDAO();
 		LoginVo lgvo = new LoginVo();
 		
-		
+		//고객 회원가입 입력
+		System.out.println("사용 할 아이디를 입력하세요");
+		String id = input.nextLine();
+		System.out.println("사용 할 비밀번호를 입력하세요");
+		String pw = input.nextLine();
+		System.out.println("이메일를 입력하세요");
+		String email = input.nextLine();
+		System.out.println("주소를 입력하세요");
+		String address = input.nextLine();
+		//입력받은 정보 LoginVo 설정
+		lgvo.setL_id(id);
+		lgvo.setL_pw(pw);
+        lgvo.setL_email(email);
+        lgvo.setL_address(address);
+		//setLoginRegiste메서드 호출 회원가입 처리
+        lgdao.setLoginRegiste(lgvo);
 	}
 
 	public void loginCheck() throws Exception {
@@ -23,7 +38,7 @@ public class LoginRegisterManager {
 		String pw;
 		boolean success = false;
 
-		System.out.println("학생 정보 수정");
+		System.out.println("로그인 페이지");
 		do {
 			System.out.print("아이디 : ");
 			id = input.nextLine();
