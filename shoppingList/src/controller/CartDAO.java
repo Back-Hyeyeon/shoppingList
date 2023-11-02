@@ -11,7 +11,7 @@ import model.CartVo;
 import model.CategoryVo;
 
 public class CartDAO {
-
+	//내장바구니에 추가하기
 	public void addCart(CartVo cvo) {
 		String sql = "INSERT into cart VALUES (cart_seq.nextval,?, ?)";
 
@@ -50,6 +50,7 @@ public class CartDAO {
 		}
 	}
 
+//내 장바구니에 넣어진 목록
 	public void CartList(String id) throws Exception {
 		String sql = "select * from categorying ct, cart c where ct.c_cord = c.c_cord and l_id = ?";
 		Connection con = null;
@@ -66,9 +67,11 @@ public class CartDAO {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				
-				System.out.printf("%d %-10s %-10s %-10s %-10s %-10s \n",rs.getInt("cno"), rs.getString("c_cord"),rs.getString("c_item"),rs.getString("c_price"),rs.getString("c_size"),rs.getString("c_color"));
-				
+
+				System.out.printf("%d %-10s %-10s %-10s %-10s %-10s \n", rs.getInt("cno"), rs.getString("c_cord"),
+						rs.getString("c_item"), rs.getString("c_price"), rs.getString("c_size"),
+						rs.getString("c_color"));
+
 			}
 		} catch (SQLException se) {
 			System.out.println(se);
@@ -86,8 +89,8 @@ public class CartDAO {
 			}
 		}
 	}// getCategoryList
-	
-	
+
+	// 내장바구니에서 삭제
 	public void setCartDelete(int no) {
 		String sql = "delete from cart where cno = ?";
 		Connection con = null;
@@ -96,7 +99,7 @@ public class CartDAO {
 		try {
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setInt(1,no);
+			pstmt.setInt(1, no);
 			int i = pstmt.executeUpdate();
 			if (i == 1) {
 				System.out.println("삭제 완료.");
@@ -118,8 +121,6 @@ public class CartDAO {
 			}
 		}
 
-	}// 
-
-	
+	}//
 
 }

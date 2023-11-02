@@ -115,7 +115,7 @@ public class CategoryVo {
 	public boolean equals(Object obj) {
 		if(!(obj instanceof CategoryVo)) {return false;}
 		CategoryVo ctgvo = (CategoryVo)obj;
-		return ctgvo.no == this.no && ctgvo.c_cord.equals(this.c_cord);
+		return ctgvo.no == this.no /*&& ctgvo.c_cord.equals(this.c_cord)*/;
 	}
 
 

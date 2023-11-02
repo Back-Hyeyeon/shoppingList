@@ -15,7 +15,7 @@ public class CartRegisterManager {
 		System.out.println("카테고리 전체 리스트:");
 		ctDAO.getCategoryList();
 
-		System.out.println("일련번호를 입력하세요");
+		System.out.println("바코드를 입력하세요");
 		String c_cord = input.nextLine();
 
 		System.out.println("아이디를 입력하세요");
