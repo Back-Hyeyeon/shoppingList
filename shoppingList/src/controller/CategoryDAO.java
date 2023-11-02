@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import model.CategoryVo;
+import model.LoginVo;
 
 public class CategoryDAO {
 	//카테고리 전체 목록
@@ -51,6 +52,7 @@ public class CategoryDAO {
 		}
 	}//getCategoryList
 		
-
-
+	
+	
+	
 }

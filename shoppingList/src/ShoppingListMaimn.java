@@ -70,6 +70,7 @@ public class ShoppingListMaimn {
 		LoginRegisterManager loginRegisterManager = new LoginRegisterManager();
 		MenuViewer.loginMenu();
 		num = MenuViewer.num.nextInt();
+		MenuViewer.num.nextLine();
 		switch(num) {
 		case Login_Choice.MRMBERSHIP:
 			loginRegisterManager.membershipJoin();
@@ -94,14 +95,16 @@ public class ShoppingListMaimn {
 	private static void categoryMenu() throws Exception {
 		int num = 0;
 		CategoryRegisterManager categoryRegisterManager = new CategoryRegisterManager();
+		CartRegisterManager cartRegisterManager = new CartRegisterManager();
 		MenuViewer.categoryMenu();
 		num = MenuViewer.num.nextInt();
+		MenuViewer.num.nextLine();
 		switch(num) {
 		case Category_Choice.LIST:
 			categoryRegisterManager.categoryList();
 			break;
 		case Category_Choice.INSERT:
-			categoryRegisterManager.addCaetInsert();
+			cartRegisterManager.addCart();
 			break;
 		default:
 			System.out.println("해당번호만 입력하세요...");
@@ -110,11 +113,13 @@ public class ShoppingListMaimn {
 	}//categoryMenu
 	
 	//장바구니 페이지
-	private static void cartMenu() {
+	private static void cartMenu() throws Exception {
 		int num = 0;
 		
 		CartRegisterManager cartRegisterManager = new CartRegisterManager();
 		MenuViewer.cartMenu();
+		num = MenuViewer.num.nextInt();
+		MenuViewer.num.nextLine();
 		switch(num) {
 		case Cart_Choice.LIST:
 			cartRegisterManager.cartChokList();
@@ -132,15 +137,24 @@ public class ShoppingListMaimn {
 	private static void managerMenu() throws Exception {
 		int num = 0;
 		ManagerRegisterManager managerRegisterManager = new ManagerRegisterManager();
+		
+		boolean mLogin = managerRegisterManager.managerLogin();
+		if(!mLogin) {
+			return;
+			}
+		
+		MenuViewer.managerMenu();
+		num = MenuViewer.num.nextInt();
+		MenuViewer.num.nextLine();
 		switch(num) {
-		case Manager_Choice.MLOG:
-			managerRegisterManager.managerLogin();
-			break;
 		case Manager_Choice.INSERT:
+			managerRegisterManager.addMCtgry();
 			break;
 		case Manager_Choice.UPDATE:
+			managerRegisterManager.updateMCtgry();
 			break;
 		case Manager_Choice.DELETE:
+			managerRegisterManager.deleteMCtgry();
 			break;
 		}
 		

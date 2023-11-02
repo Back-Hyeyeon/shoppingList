@@ -76,21 +76,11 @@ public class LoginDAO {
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
-			try {
-				if (rs != null) {
-					rs.close();
-				}
-				if (pstmt != null) {
+				
 					pstmt.close();
-				}
-				if (con != null) {
-					con.close();
-				}
-			} catch (SQLException e2) {
 			}
 			return logins;
 		}
-	}
 
 //	 내정보
 	public List<LoginVo> getLoginTotalList(String id) {

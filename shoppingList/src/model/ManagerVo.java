@@ -39,9 +39,7 @@ public class ManagerVo {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (!(obj instanceof ManagerVo)) {
-			return false;
-		}
+		if (!(obj instanceof ManagerVo)) {return false;}
 		ManagerVo mgvo = (ManagerVo) obj;
 		return mgvo.m_id.equals(this.m_id) && mgvo.m_pw.equals(this.m_pw);
 	}

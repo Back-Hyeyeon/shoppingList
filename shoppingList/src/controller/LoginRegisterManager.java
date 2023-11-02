@@ -135,6 +135,8 @@ public class LoginRegisterManager {
 		System.out.println();
 		System.out.println("======================================");
 	}
+	
+	//아이디 삭
 	public void logout() {
 		Scanner input = new Scanner(System.in);
 		

@@ -44,10 +44,9 @@ public class MenuViewer {
 	public static void managerMenu() {
 		System.out.println();
 		System.out.println("관리자 로그인입니다.");
-		System.out.println("1. 관리자 로그인");
-		System.out.println("2. 카테고리 추가");
-		System.out.println("3. 카테고리 수정");
-		System.out.println("4. 카테고리 삭제");
+		System.out.println("1. 카테고리 추가");
+		System.out.println("2. 카테고리 수정");
+		System.out.println("3. 카테고리 삭제");
 	}
 
 }

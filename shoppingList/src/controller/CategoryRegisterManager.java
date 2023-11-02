@@ -17,17 +17,5 @@ public class CategoryRegisterManager {
 	}
 	//카트 목록에 들어갈 리스트를 추가하기 위한 저장리스트
 
-	public void addCaetInsert() throws Exception {
-	
-		CategoryDAO cdao = new CategoryDAO();
-		System.out.println("카테고리 전체 리스트:");
-		cdao.getCategoryList();
-		
-		
-	
-	   
-	    
-
-	}
 	
 }
