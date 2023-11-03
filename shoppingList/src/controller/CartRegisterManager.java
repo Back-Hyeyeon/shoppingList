@@ -7,7 +7,7 @@ import model.CartVo;
 public class CartRegisterManager {
 	public static Scanner input = new Scanner(System.in);
 
-	public void addCart() throws Exception {
+	public void addCart(String id) throws Exception {
 		CategoryDAO ctDAO = new CategoryDAO();
 		CartDAO cdao = new CartDAO();
 		CartVo cvo = new CartVo();
@@ -17,10 +17,7 @@ public class CartRegisterManager {
 
 		System.out.println("바코드를 입력하세요");
 		String c_cord = input.nextLine();
-
-		System.out.println("아이디를 입력하세요");
-		String id = input.nextLine();
-
+		
 		cvo.setC_cord(c_cord);
 		cvo.setL_id(id);
 
@@ -28,29 +25,35 @@ public class CartRegisterManager {
 
 	}
 
-	public void cartChokList() throws Exception {
+	public void cartChokList(String id) throws Exception {
 
 		CartDAO cdao = new CartDAO();
 		CartVo cvo = new CartVo();
 
 		System.out.println("나의 장바구니 목록");
 
-		System.out.println("아이디를 입력하세요");
-		String id = input.nextLine();
+//		System.out.println("아이디를 입력하세요");
+//		String id = input.nextLine();
 		cdao.CartList(id);
 
 	}
 
-	public void cartChokListDelete() {
+	public void cartChokListDelete(String id) throws Exception {
 		
 		CartDAO cdao = new CartDAO();
 		CartVo cvo = new CartVo();
+		
+//		System.out.println("아이디를 입력하세요");
+//		System.out.println("======================");
+//		String id = input.nextLine();
+		cdao.CartList(id);
+		System.out.println("======================");
 		
 		System.out.println("삭제할 일련번호를 입력하세요");
 		int no = input.nextInt();
 		input.nextLine();
 		cdao.setCartDelete(no);
-		
+		System.out.println("======================");
 
 	}
 

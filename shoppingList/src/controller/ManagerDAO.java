@@ -10,14 +10,13 @@ import model.CategoryVo;
 public class ManagerDAO {
 	// 관리자 로그인
 	public boolean managerLogin(String id, String pw) throws Exception {
-		String sql = "select * from ismanager WHERE m_id = ? and m_pw = ?";
-
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		boolean the = false;
 		try {
 			con = DBUtil.getConnection();
+			String sql = "select * from ismanager WHERE m_id = ? and m_pw = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, pw);
@@ -40,15 +39,13 @@ public class ManagerDAO {
 
 	// 입고
 	public void addMCInsert(CategoryVo ctgrVo) throws Exception {
-		String sql = "INSERT into categorying VALUES(categorying_seq.nextval, ?, ?, ?,?,?)";
-
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
 		try {
 			con = DBUtil.getConnection();
+			String sql = "INSERT into categorying VALUES(categorying_seq.nextval, ?, ?, ?,?,?)";
 			pstmt = con.prepareStatement(sql);
-
 			pstmt.setString(1, ctgrVo.getC_cord());
 			pstmt.setString(2, ctgrVo.getC_item());
 			pstmt.setString(3, ctgrVo.getC_price());
@@ -84,14 +81,12 @@ public class ManagerDAO {
 
 	// 카테고리 수정
 	public void upMCtgry(CategoryVo ctgrVo) {
-
-		String sql = "update categorying set c_cord = ?, c_item = ?, c_price = ? ,c_size = ?, c_color = ? where no = ?";
-
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
 		try {
 			con = DBUtil.getConnection();
+			String sql = "update categorying set c_cord = ?, c_item = ?, c_price = ? ,c_size = ?, c_color = ? where no = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, ctgrVo.getC_cord());
 			pstmt.setString(2, ctgrVo.getC_item());
@@ -104,7 +99,6 @@ public class ManagerDAO {
 
 			if (i == 1) {
 				System.out.println("카테고리 수정 완료.");
-				System.out.println("카테고리 수정 성공!!!");
 			} else {
 				System.out.println("학과 수정 실패!!!");
 			}
@@ -128,21 +122,18 @@ public class ManagerDAO {
 	// 카테고리 삭제
 
 	public void deleteList(int no) throws Exception {
-		String sql = "delete from categorying where no = ?";
-
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
 		try {
-
 			con = DBUtil.getConnection();
+			String sql = "delete from categorying where no = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, no);
 
 			int i = pstmt.executeUpdate();
 			if (i == 1) {
 				System.out.println("카테고리 품목 삭제 완료.");
-				System.out.println("카테고리 삭제 성공!!!");
 			} else {
 				System.out.println("카테고리 삭제 실패!!!");
 			}

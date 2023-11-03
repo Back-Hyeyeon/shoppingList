@@ -13,13 +13,12 @@ import model.CategoryVo;
 public class CartDAO {
 	//내장바구니에 추가하기
 	public void addCart(CartVo cvo) {
-		String sql = "INSERT into cart VALUES (cart_seq.nextval,?, ?)";
-
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
 		try {
 			con = DBUtil.getConnection();
+			String sql = "INSERT into cart VALUES (cart_seq.nextval,?, ?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, cvo.getC_cord());
 			pstmt.setString(2, cvo.getL_id());
@@ -27,7 +26,6 @@ public class CartDAO {
 			int i = pstmt.executeUpdate();
 
 			if (i == 1) {
-				System.out.println("카트에 추가 되었습니다");
 				System.out.println("카트정상 추가 되었습니다...");
 			} else {
 				System.out.println("추가 실패했습니다...");
@@ -67,8 +65,9 @@ public class CartDAO {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-
-				System.out.printf("%d %-10s %-10s %-10s %-10s %-10s \n", rs.getInt("cno"), rs.getString("c_cord"),
+				System.out.printf("%-7s %-10s %-10s %-10s %-10s %-10s \n","일련번호","바코드","품목" ,"가격","사이즈","컬러");
+				System.out.println();
+				System.out.printf("%-7d %-10s %-10s %-10s %-10s %-10s \n", rs.getInt("cno"), rs.getString("c_cord"),
 						rs.getString("c_item"), rs.getString("c_price"), rs.getString("c_size"),
 						rs.getString("c_color"));
 
@@ -103,7 +102,6 @@ public class CartDAO {
 			int i = pstmt.executeUpdate();
 			if (i == 1) {
 				System.out.println("삭제 완료.");
-				System.out.println("삭제 성공!!!");
 			} else {
 				System.out.println("삭제 실패!!!");
 			}

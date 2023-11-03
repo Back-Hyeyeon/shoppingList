@@ -9,7 +9,6 @@ public class LoginRegisterManager {
 //회원가입 membershipJoin
 	public void membershipJoin() {
 		Scanner input = new Scanner(System.in);
-		Scanner input1 = new Scanner(System.in);
 
 		LoginDAO lgdao = new LoginDAO();
 		LoginVo lgvo = new LoginVo();
@@ -32,9 +31,10 @@ public class LoginRegisterManager {
 		lgdao.setLoginRegiste(lgvo);
 	}
 //로그인 후 내정보 확인 가능
-	public boolean loginCheck() throws Exception {
+	public String loginCheck() throws Exception {
 		Scanner input = new Scanner(System.in);
-
+		
+		
 		System.out.println("로그인 및 내정보 페이지");
 
 		System.out.print("아이디: ");
@@ -47,20 +47,16 @@ public class LoginRegisterManager {
 
 		if (Login) {
 			System.out.println("로그인 성공!");
-			loginMypage(id);
-			return true;
+			return id;
 		} else {
 			System.out.println("아이디 또는 비밀번호가 틀림. 다시 입력");
-			return false;
+			return null;
 		}
-
 	}
 //내정보
 	public void loginMypage(String id) {
 		Scanner input = new Scanner(System.in);
-		System.out.print("아이디를 입력하세요: ");
-		id = input.nextLine();
-
+		
 		LoginDAO lgdao = new LoginDAO();
 		List<LoginVo> loginList = lgdao.getLoginTotalList(id);
 
@@ -76,22 +72,18 @@ public class LoginRegisterManager {
 
 	}
 //내정보 수정
-	public void loginUpdate() throws Exception {
+	public void loginUpdate(String id) throws Exception {
 		Scanner input = new Scanner(System.in);
-		Scanner input1 = new Scanner(System.in);
 
 		LoginDAO lgdao = new LoginDAO();
 		LoginVo lgvo = new LoginVo();
 
-		String id = null;
+		
 		String pw;
 		String email;
 		String address;
 
-		System.out.println("수정가능한 아이디이나, 중복은 허용 되지 않습니다.");
-		System.out.print("아이디 : ");
-		id = input.nextLine();
-		System.out.println();
+		
 		System.out.println("======================================");
 		System.out.println("전체 정보 (수정 전)");
 		System.out.println("일련번호\t 아이디\t 비밀번호\t 이메일\t\t 주소");
@@ -124,6 +116,7 @@ public class LoginRegisterManager {
 		lgvo.setL_address(address);
 		lgdao.setloginUpdata(lgvo);
 		System.out.println();
+		
 		System.out.println("======================================");
 		System.out.println("전체 정보 (수정 후)");
 		System.out.println("일련번호\t 아이디\t 비밀번호\t 이메일\t\t 주소");

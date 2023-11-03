@@ -68,7 +68,6 @@ public class ManagerRegisterManager {
 	// 관리자로 카테고리 정보 수정
 	public void updateMCtgry() throws Exception {
 		Scanner input = new Scanner(System.in);
-		Scanner input1 = new Scanner(System.in);
 
 		ManagerDAO mdao = new ManagerDAO();
 		CategoryVo ctgrVo = new CategoryVo();
@@ -117,7 +116,6 @@ public class ManagerRegisterManager {
 	// 관리자로 카테고리 목록 삭제.
 	public void deleteMCtgry() throws Exception {
 		Scanner input = new Scanner(System.in);
-		Scanner input1 = new Scanner(System.in);
 		
 		ManagerDAO mdao = new ManagerDAO();
 		CategoryVo ctgrVo = new CategoryVo();
@@ -133,6 +131,7 @@ public class ManagerRegisterManager {
 		System.out.println("삭제할 카테고리 일련번호 입력");
 		System.out.print("일련번호 : ");
 		int no = input.nextInt();
+		input.nextLine();
 		
 		mdao.deleteList(no);
 		

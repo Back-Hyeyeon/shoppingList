@@ -12,13 +12,12 @@ import model.LoginVo;
 public class LoginDAO {
 //	 회원가입
 	public void setLoginRegiste(LoginVo lgvo) {
-		String sql = "INSERT into login VALUES (login_seq.nextval,?, ?, ?, ?)";
-
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
 		try {
 			con = DBUtil.getConnection();
+			String sql = "INSERT into login VALUES (login_seq.nextval,?, ?, ?, ?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, lgvo.getL_id());
 			pstmt.setString(2, lgvo.getL_pw());
@@ -29,7 +28,6 @@ public class LoginDAO {
 
 			if (i == 1) {
 				System.out.println(lgvo.getL_id() + "회원가입 완료...");
-				System.out.println("회원가입 정상처리 되었습니다...");
 			} else {
 				System.out.println("회원가입 실패했습니다...");
 			}
@@ -53,8 +51,6 @@ public class LoginDAO {
 
 //	 로그인
 	public boolean getLogin(String id, String pw) throws Exception {
-		String sql = "select * from login WHERE l_id = ? and l_pw = ?";
-
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -62,6 +58,7 @@ public class LoginDAO {
 		boolean logins = false;
 		try {
 			con = DBUtil.getConnection();
+			String sql = "select * from login WHERE l_id = ? and l_pw = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, pw);
@@ -84,7 +81,6 @@ public class LoginDAO {
 
 //	 내정보
 	public List<LoginVo> getLoginTotalList(String id) {
-		String sql = "SELECT * FROM login WHERE l_id = ?";
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -92,6 +88,7 @@ public class LoginDAO {
 		List<LoginVo> loginList = new ArrayList<>();
 		try {
 			con = DBUtil.getConnection();
+			String sql = "SELECT * FROM login WHERE l_id = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -128,13 +125,12 @@ public class LoginDAO {
 
 //	 내정보 수정
 	public boolean setloginUpdata(LoginVo lgvo) throws Exception {
-		// sql 업데이크 쿼리 생성
-		String sql = "update login set l_pw = ?, l_email = ?, l_address = ? WHERE l_id = ?";
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		boolean Information = false;
 		try {
 			con = DBUtil.getConnection();
+			String sql = "update login set l_pw = ?, l_email = ?, l_address = ? WHERE l_id = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, lgvo.getL_pw());
 			pstmt.setString(2, lgvo.getL_email());
@@ -144,7 +140,6 @@ public class LoginDAO {
 			int i = pstmt.executeUpdate();
 
 			if (i == 1) {
-				System.out.println(lgvo.getL_id() + " : 정보 수정");
 				System.out.println("정보가 수정 완료되었습니다");
 			}
 		} catch (SQLException e) {
@@ -164,18 +159,17 @@ public class LoginDAO {
 	}// setloginUpdata
 
 	public void setLessonDelete(String id) {
-		String sql = "delete from login where l_id = ?";
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
 		try {
 			con = DBUtil.getConnection();
+			String sql = "delete from login where l_id = ?";
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setString(1, id);
 			int i = pstmt.executeUpdate();
 			if (i == 1) {
 				System.out.println("id 삭제 완료.");
-				System.out.println("id 삭제 성공!!!");
 			} else {
 				System.out.println("id 삭제 실패!!!");
 			}
@@ -185,7 +179,6 @@ public class LoginDAO {
 			System.out.println("e=[" + e + "]");
 		} finally {
 			try {
-				// 데이터베이스와의 연결에 사용되었던 오브젝트를 해제
 				if (pstmt != null)
 					pstmt.close();
 				if (con != null)

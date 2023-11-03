@@ -11,7 +11,6 @@ import model.LoginVo;
 public class CategoryDAO {
 	//카테고리 전체 목록
 	public void getCategoryList() throws Exception {
-		String sql = "select * from categorying order by no";
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -19,6 +18,7 @@ public class CategoryDAO {
 		
 		try {
 			con = DBUtil.getConnection();
+			String sql = "select * from categorying order by no";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
