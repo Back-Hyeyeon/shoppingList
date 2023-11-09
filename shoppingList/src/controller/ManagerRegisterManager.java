@@ -88,6 +88,7 @@ public class ManagerRegisterManager {
 
 		System.out.println("수정 품목를 입력하세요");
 		String C_item = input.nextLine();
+		
 		System.out.println("수정 가격을 입력하세요");
 		String C_price = input.nextLine();
 		System.out.println("수정 사이즈를 입력하세요");
@@ -97,7 +98,6 @@ public class ManagerRegisterManager {
 
 		ctgrVo.setNo(no);
 		ctgrVo.setC_cord(C_cord);
-		ctgrVo.setC_cord(C_color);
 		ctgrVo.setC_item(C_item);
 		ctgrVo.setC_price(C_price);
 		ctgrVo.setC_size(C_size);

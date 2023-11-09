@@ -1,5 +1,6 @@
 package controller;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,32 +14,27 @@ public class LoginDAO {
 //	 회원가입
 	public void setLoginRegiste(LoginVo lgvo) {
 		Connection con = null;
-		PreparedStatement pstmt = null;
-
+		CallableStatement callP = null;
+		
 		try {
 			con = DBUtil.getConnection();
-			String sql = "INSERT into login VALUES (login_seq.nextval,?, ?, ?, ?)";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, lgvo.getL_id());
-			pstmt.setString(2, lgvo.getL_pw());
-			pstmt.setString(3, lgvo.getL_email());
-			pstmt.setString(4, lgvo.getL_address());
+			String sql = "call login_IN(?,?,?,?)";
+			callP = con.prepareCall(sql);
+			callP.setString(1, lgvo.getL_id());
+			callP.setString(2, lgvo.getL_pw());
+			callP.setString(3, lgvo.getL_email());
+			callP.setString(4, lgvo.getL_address());
 
-			int i = pstmt.executeUpdate();
-
-			if (i == 1) {
+			callP.execute();
 				System.out.println(lgvo.getL_id() + "회원가입 완료...");
-			} else {
-				System.out.println("회원가입 실패했습니다...");
-			}
 		} catch (SQLException e) {
 			System.out.println(e);
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
 			try {
-				if (pstmt != null) {
-					pstmt.close();
+				if (callP != null) {
+					callP.close();
 				}
 				if (con != null) {
 					con.close();
@@ -73,11 +69,11 @@ public class LoginDAO {
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
-				
-					pstmt.close();
-			}
-			return logins;
+
+			pstmt.close();
 		}
+		return logins;
+	}
 
 //	 내정보
 	public List<LoginVo> getLoginTotalList(String id) {
@@ -126,30 +122,29 @@ public class LoginDAO {
 //	 내정보 수정
 	public boolean setloginUpdata(LoginVo lgvo) throws Exception {
 		Connection con = null;
-		PreparedStatement pstmt = null;
+		CallableStatement callP = null;
 		boolean Information = false;
 		try {
 			con = DBUtil.getConnection();
-			String sql = "update login set l_pw = ?, l_email = ?, l_address = ? WHERE l_id = ?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, lgvo.getL_pw());
-			pstmt.setString(2, lgvo.getL_email());
-			pstmt.setString(3, lgvo.getL_address());
-			pstmt.setString(4, lgvo.getL_id());
+			String sql = "call login_Updat(?,?,?,?)";
+			callP = con.prepareCall(sql);
+			callP.setInt(1, lgvo.getNo());
+			callP.setString(2, lgvo.getL_pw());
+			callP.setString(3, lgvo.getL_email());
+			callP.setString(4, lgvo.getL_address());
 
-			int i = pstmt.executeUpdate();
+			callP.execute();
 
-			if (i == 1) {
-				System.out.println("정보가 수정 완료되었습니다");
-			}
+			System.out.println("정보가 수정 완료되었습니다");
+
 		} catch (SQLException e) {
 			System.out.println("SQL 오류: " + e.getMessage());
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
 			try {
-				if (pstmt != null)
-					pstmt.close();
+				if (callP != null)
+					callP.close();
 				if (con != null)
 					con.close();
 			} catch (SQLException e) {

@@ -1,5 +1,6 @@
 package controller;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,7 +12,7 @@ import model.CartVo;
 import model.CategoryVo;
 
 public class CartDAO {
-	//내장바구니에 추가하기
+	// 내장바구니에 추가하기
 	public void addCart(CartVo cvo) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -65,7 +66,7 @@ public class CartDAO {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				System.out.printf("%-7s %-10s %-10s %-10s %-10s %-10s \n","일련번호","바코드","품목" ,"가격","사이즈","컬러");
+				System.out.printf("%-7s %-10s %-10s %-10s %-10s %-10s \n", "일련번호", "바코드", "품목", "가격", "사이즈", "컬러");
 				System.out.println();
 				System.out.printf("%-7d %-10s %-10s %-10s %-10s %-10s \n", rs.getInt("cno"), rs.getString("c_cord"),
 						rs.getString("c_item"), rs.getString("c_price"), rs.getString("c_size"),
@@ -90,29 +91,27 @@ public class CartDAO {
 	}// getCategoryList
 
 	// 내장바구니에서 삭제
-	public void setCartDelete(int no) {
-		String sql = "delete from cart where cno = ?";
+	public void setCartDelete(int cno) {
 		Connection con = null;
-		PreparedStatement pstmt = null;
-
+		CallableStatement callP = null;
 		try {
 			con = DBUtil.getConnection();
-			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setInt(1, no);
-			int i = pstmt.executeUpdate();
-			if (i == 1) {
-				System.out.println("삭제 완료.");
-			} else {
-				System.out.println("삭제 실패!!!");
-			}
+			String sql = "call Cart_Delete(?)";
+			callP = con.prepareCall(sql);
+			callP.setInt(1, cno);
+
+			callP.execute();
+
+			System.out.println("삭제 완료.");
+
 		} catch (SQLException e) {
 			System.out.println("e=[" + e + "]");
 		} catch (Exception e) {
 			System.out.println("e=[" + e + "]");
 		} finally {
 			try {
-				if (pstmt != null)
-					pstmt.close();
+				if (callP != null)
+					callP.close();
 				if (con != null)
 					con.close();
 			} catch (SQLException e) {

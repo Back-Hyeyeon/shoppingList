@@ -1,5 +1,6 @@
 package controller;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -40,26 +41,21 @@ public class ManagerDAO {
 	// 입고
 	public void addMCInsert(CategoryVo ctgrVo) throws Exception {
 		Connection con = null;
-		PreparedStatement pstmt = null;
+		CallableStatement callP = null;
 
 		try {
 			con = DBUtil.getConnection();
-			String sql = "INSERT into categorying VALUES(categorying_seq.nextval, ?, ?, ?,?,?)";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, ctgrVo.getC_cord());
-			pstmt.setString(2, ctgrVo.getC_item());
-			pstmt.setString(3, ctgrVo.getC_price());
-			pstmt.setString(4, ctgrVo.getC_size());
-			pstmt.setString(5, ctgrVo.getC_color());
+			String sql = "call categorying_IN(?,?,?,?,?)";
+			callP = con.prepareCall(sql);
+			callP.setString(1, ctgrVo.getC_cord());
+			callP.setString(2, ctgrVo.getC_item());
+			callP.setString(3, ctgrVo.getC_price());
+			callP.setString(4, ctgrVo.getC_size());
+			callP.setString(5, ctgrVo.getC_color());
 
-			int i = pstmt.executeUpdate();
+			callP.execute();
 
-			if (i == 1) {
-				System.out.println("카탈로그 업데이트 완료...");
-				System.out.println("카테고리 정상 처리 되었습니다...");
-			} else {
-				System.out.println("업데이트가 실패했습니다...");
-			}
+			System.out.println("카탈로그 업데이트 완료...");
 
 		} catch (SQLException e) {
 			System.out.println(e);
@@ -67,8 +63,8 @@ public class ManagerDAO {
 			System.out.println(e);
 		} finally {
 			try {
-				if (pstmt != null) {
-					pstmt.close();
+				if (callP != null) {
+					callP.close();
 				}
 				if (con != null) {
 					con.close();
@@ -82,26 +78,22 @@ public class ManagerDAO {
 	// 카테고리 수정
 	public void upMCtgry(CategoryVo ctgrVo) {
 		Connection con = null;
-		PreparedStatement pstmt = null;
+		CallableStatement callP = null;
 
 		try {
 			con = DBUtil.getConnection();
-			String sql = "update categorying set c_cord = ?, c_item = ?, c_price = ? ,c_size = ?, c_color = ? where no = ?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, ctgrVo.getC_cord());
-			pstmt.setString(2, ctgrVo.getC_item());
-			pstmt.setString(3, ctgrVo.getC_price());
-			pstmt.setString(4, ctgrVo.getC_size());
-			pstmt.setString(5, ctgrVo.getC_color());
-			pstmt.setInt(6, ctgrVo.getNo());
+			String sql = "CALL categorying_Updat(?,?, ?, ?, ?, ?)";
+			callP = con.prepareCall(sql);
+			callP.setInt(1, ctgrVo.getNo());
+			callP.setString(2, ctgrVo.getC_cord());
+			callP.setString(3, ctgrVo.getC_item());
+			callP.setString(4, ctgrVo.getC_price());
+			callP.setString(5, ctgrVo.getC_size());
+			callP.setString(6, ctgrVo.getC_color());
 
-			int i = pstmt.executeUpdate();
+			callP.execute();
+			System.out.println("카테고리 수정 완료.");
 
-			if (i == 1) {
-				System.out.println("카테고리 수정 완료.");
-			} else {
-				System.out.println("학과 수정 실패!!!");
-			}
 		} catch (SQLException e) {
 			System.out.println(e);
 		} catch (Exception e) {
@@ -109,8 +101,8 @@ public class ManagerDAO {
 		} finally {
 			try {
 				// 데이터베이스와의 연결에 사용되었던 오브젝트를 해제
-				if (pstmt != null)
-					pstmt.close();
+				if (callP != null)
+					callP.close();
 				if (con != null)
 					con.close();
 			} catch (SQLException e) {
@@ -123,20 +115,17 @@ public class ManagerDAO {
 
 	public void deleteList(int no) throws Exception {
 		Connection con = null;
-		PreparedStatement pstmt = null;
+		CallableStatement callp = null;
 
 		try {
 			con = DBUtil.getConnection();
-			String sql = "delete from categorying where no = ?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, no);
+			String sql = "call categorying_Delete(?)";
+			callp = con.prepareCall(sql);
+			callp.setInt(1, no);
 
-			int i = pstmt.executeUpdate();
-			if (i == 1) {
-				System.out.println("카테고리 품목 삭제 완료.");
-			} else {
-				System.out.println("카테고리 삭제 실패!!!");
-			}
+			callp.execute();
+
+			System.out.println("카테고리 품목 삭제 완료.");
 
 		} catch (SQLException e) {
 			System.out.println(e);
@@ -144,8 +133,8 @@ public class ManagerDAO {
 			System.out.println(e);
 		} finally {
 			try {
-				if (pstmt != null)
-					pstmt.close();
+				if (callp != null)
+					callp.close();
 				if (con != null)
 					con.close();
 			} catch (Exception e2) {

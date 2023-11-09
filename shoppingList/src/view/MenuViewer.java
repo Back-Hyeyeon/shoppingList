@@ -30,7 +30,7 @@ public class MenuViewer {
 //회원가입 로그인페이지
 	public static void loginMenu() {
 		System.out.println();
-		System.out.println("회원가입 페이지입니다.");
+		System.out.println("내정보 페이지입니다.");
 		System.out.println("0. 나   가  기");
 		System.out.println("1. 내정보");
 		System.out.println("2. 내정보 수정");
